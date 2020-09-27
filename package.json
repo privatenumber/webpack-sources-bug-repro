@@ -1,0 +1,14 @@
+{
+  "name": "webpack-sources-bug-repro",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack --config webpack.config"
+  },
+  "author": "Hiroki Osame <hiroki.osame@gmail.com>",
+  "devDependencies": {
+    "esbuild": "^0.7.7",
+    "esbuild-loader": "^3.0.0-alpha.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
