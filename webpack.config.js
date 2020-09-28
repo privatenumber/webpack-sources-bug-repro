@@ -1,8 +1,6 @@
 const path = require('path');
-const {
-  ESBuildPlugin,
-  ESBuildMinifyPlugin
-} = require('esbuild-loader');
+const ESBuildPlugin = require('./esbuild-minify/plugin');
+const ESBuildMinifyPlugin = require('./esbuild-minify/minify-plugin');
 
 module.exports = {
 	mode: 'production',
