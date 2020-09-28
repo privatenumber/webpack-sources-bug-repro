@@ -42,35 +42,16 @@ class ESBuildMinifyPlugin {
 				hash.update(meta),
 			);
 
-			if (compilation.hooks.processAssets) {
-				// Webpack 5
-				compilation.hooks.processAssets.tapPromise(
-					{
-						name: pluginName,
-						stage: compilation.constructor.PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE,
-					},
-					assets => this.transformAssets(compilation, Object.keys(assets)),
-				);
-
-				compilation.hooks.statsPrinter.tap(pluginName, stats => {
-					stats.hooks.print
-						.for('asset.info.minimized')
-						.tap(pluginName, (minimized, {green, formatFlag}) =>
-							minimized ? green(formatFlag('minimized')) : undefined,
-						);
-				});
-			} else {
-				// Webpack 4
-				compilation.hooks.optimizeChunkAssets.tapPromise(
-					pluginName,
-					async chunks => {
-						return this.transformAssets(
-							compilation,
-							flatMap(chunks, chunk => chunk.files),
-						);
-					},
-				);
-			}
+			// Webpack 4
+			compilation.hooks.optimizeChunkAssets.tapPromise(
+				pluginName,
+				async chunks => {
+					return this.transformAssets(
+						compilation,
+						flatMap(chunks, chunk => chunk.files),
+					);
+				},
+			);
 		});
 	}
 
